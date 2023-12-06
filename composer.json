@@ -1,0 +1,16 @@
+{
+    "name": "tabbakka/light-orm",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Tabbakka\\LightOrm\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vladyslav Popov",
+            "email": "vladpopov90@gmail.com"
+        }
+    ],
+    "require": {}
+}
