@@ -31,12 +31,41 @@ abstract class Repository implements IRepositoryInterface
 
     #[\Override] public function findBy(array $criteria): array
     {
-        // TODO: Implement findBy() method.
+        $builder = new Builder();
+
+        $result = $builder->select(['*'])
+            ->from($this->getTableName());
+
+        //apply criteria
+        foreach ($criteria as $key => $value) {
+            $result = $result->where([$key => $value]);
+        }
+
+        $result = $result
+            ->get();
+
+        $response = [];
+        foreach ($result as $item) {
+            $response[] = $this->getMapper()->mapFromDatabase($item);
+        }
+
+        return $response;
     }
 
     #[\Override] public function findAll(): array
     {
-        // TODO: Implement findAll() method.
+        $builder = new Builder();
+
+        $result = $builder->select(['*'])
+            ->from($this->getTableName())
+            ->get();
+
+        $response = [];
+        foreach ($result as $item) {
+            $response[] = $this->getMapper()->mapFromDatabase($item);
+        }
+
+        return $response;
     }
 
     /**
