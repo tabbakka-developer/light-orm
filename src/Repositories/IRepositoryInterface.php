@@ -15,15 +15,13 @@ interface IRepositoryInterface
 
     public function findOneById(int $id): IEntityInterface;
 
-    public function insert(array $data): void;
+    public function create(array $data): void;
 
     public function update(int $id, array $data): void;
 
     public function delete(int $id): void;
 
     public function count(): int;
-
-    public function countBy(array $criteria): int;
 
     public function exists(int $id): bool;
 

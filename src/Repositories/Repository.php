@@ -86,29 +86,46 @@ abstract class Repository implements IRepositoryInterface
         return $this->getMapper()->mapFromDatabase($result);
     }
 
-    #[\Override] public function insert(array $data): void
+    #[\Override] public function create(array $data): void
     {
-        // TODO: Implement insert() method.
+        $builder = new Builder();
+
+        $builder->insert($data)
+            ->into($this->getTableName())
+            ->get();
     }
 
     #[\Override] public function update(int $id, array $data): void
     {
-        // TODO: Implement update() method.
+        $builder = new Builder();
+
+        $builder->update($data)
+            ->from($this->getTableName())
+            ->where(['id' => $id])
+            ->get();
     }
 
     #[\Override] public function delete(int $id): void
     {
-        // TODO: Implement delete() method.
+        $builder = new Builder();
+
+        $builder->delete()
+            ->from($this->getTableName())
+            ->where(['id' => $id])
+            ->get();
     }
 
-    #[\Override] public function count(): int
+    #[\Override] public function count(string $field = "*", array $criteria = []): int
     {
-        // TODO: Implement count() method.
-    }
+        $builder = new Builder();
 
-    #[\Override] public function countBy(array $criteria): int
-    {
-        // TODO: Implement countBy() method.
+        $result = $builder
+            ->from($this->getTableName())
+            ->where($criteria)
+            ->count($field)
+            ->get();
+
+        return $result[0]->cnt ?? 0;
     }
 
     #[\Override] public function exists(int $id): bool
