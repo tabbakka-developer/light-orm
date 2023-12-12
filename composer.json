@@ -12,5 +12,7 @@
             "email": "vladpopov90@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+      "ext-mysqli": "*"
+    }
 }
